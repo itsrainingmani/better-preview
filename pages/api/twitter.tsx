@@ -46,7 +46,7 @@ export default async function handler(request: VercelRequest) {
         >
           <div
             style={{
-              fontSize: 40,
+              fontSize: 60,
               fontStyle: "normal",
               letterSpacing: "-0.025em",
               color: "white",
