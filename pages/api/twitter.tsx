@@ -11,7 +11,7 @@ export default async function handler(request: VercelRequest) {
     const fontData = await fetch(
       new URL("../../assets/berkeley-mono.ttf", import.meta.url),
     ).then((res) => res.arrayBuffer());
-    const { searchParams } = new URL(request.url);
+    const { searchParams } = new URL(request.url ?? "");
 
     // ?title=<title>
     const hasTitle = searchParams.has("url");
