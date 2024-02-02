@@ -46,12 +46,12 @@ export default async function handler(request: VercelRequest) {
         >
           <div
             style={{
-              fontSize: 30,
+              fontSize: 40,
               fontStyle: "normal",
               letterSpacing: "-0.025em",
               color: "white",
               // marginTop: 30,
-              padding: "0 120px",
+              padding: "0 60px",
               lineHeight: 1.4,
               whiteSpace: "pre-wrap",
               fontFamily: "Berkeley Mono",
