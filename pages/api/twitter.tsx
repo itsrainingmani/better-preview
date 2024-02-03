@@ -46,6 +46,7 @@ export default async function handler(request: VercelRequest) {
     // ?title=<title>
     const hasTitle = searchParams.has("url");
     let image_text = "";
+    let display_text = "";
     if (hasTitle) {
       const title = hasTitle
         ? searchParams.get("url")?.slice(0, 100)
@@ -64,17 +65,22 @@ export default async function handler(request: VercelRequest) {
 
       let last_emdash = image_text.lastIndexOf("— ");
 
-      let display_name =
-        image_text.slice(last_emdash + 2, image_text.length).split(")")[0] +
-        ")";
+      let split_name_and_date = image_text
+        .slice(last_emdash + 2, image_text.length)
+        .split(")");
+      let display_name = split_name_and_date[0].trim() + ")";
+      let tweet_date = split_name_and_date[1].trim();
+
+      display_text = `${display_name} | ${tweet_date}`;
       image_text = image_text.slice(0, last_emdash);
 
       if (image_text.length >= MAX_TWEET_LENGTH) {
         image_text = image_text.slice(0, MAX_TWEET_LENGTH - 3);
-        // image_text += "...";
       }
 
-      image_text += `\n\n— ${display_name}`;
+      if (image_text.substring(image_text.length - 3, image_text.length)) {
+        image_text += "...";
+      }
     } else {
       image_text = "twitter";
     }
@@ -94,6 +100,16 @@ export default async function handler(request: VercelRequest) {
             flexWrap: "wrap",
           }}
         >
+          <div
+            style={{
+              fontSize: 30,
+              color: "white",
+              marginBottom: "10px",
+              fontFamily: "Berkeley Mono",
+            }}
+          >
+            {display_text}
+          </div>
           <div
             style={{
               fontSize: 40,
