@@ -38,9 +38,6 @@ function decodeHtmlEntities(html: string) {
 
 export default async function handler(request: VercelRequest) {
 	try {
-		const fontData = await fetch(
-			new URL('../../assets/berkeley-mono.ttf', import.meta.url)
-		).then((res) => res.arrayBuffer());
 		const { searchParams } = new URL(request.url ?? '');
 
 		// ?title=<title>
@@ -85,7 +82,7 @@ export default async function handler(request: VercelRequest) {
 			image_text = 'twitter';
 		}
 
-		return image_text;
+		return display_text + '\n' + image_text;
 	} catch (e: any) {
 		console.log(`${e.message}`);
 		return new Response(`Failed to generate the image`, {
