@@ -23,7 +23,8 @@ app.get('/', async (c) => {
 			html`<!doctype html>
   <head>
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="${twit_contents ?? 'Twit'}" />
+    <meta property="og:title" content="Twit" />
+		<meta property="og:description" content="${twit_contents}" />
     <meta property="og:url" content="${tweet_param}" />
     <meta property="og:image" content="${twit_image}" />
     <script type="text/javascript">
