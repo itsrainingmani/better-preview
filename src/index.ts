@@ -13,11 +13,10 @@ app.get('/', async (c) => {
 	if (tweet_param) {
 		const twit_image = `${image_api_url}${tweet_param}`;
 		const twit_resp = await fetch(`${tweet_api_url}${tweet_param}`);
-		const twit_data: any = await twit_resp.json();
-		let twit_contents;
+		let twit_contents: string | undefined = undefined;
 
-		if (twit_data) {
-			twit_contents = twit_data['content'];
+		if (twit_resp.ok) {
+			twit_contents = await twit_resp.text();
 		}
 
 		return c.html(
