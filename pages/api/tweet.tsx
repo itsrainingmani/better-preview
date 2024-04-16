@@ -1,4 +1,3 @@
-import { ImageResponse } from '@vercel/og';
 import type { VercelRequest } from '@vercel/node';
 import { parse } from 'node-html-parser';
 
@@ -82,7 +81,7 @@ export default async function handler(request: VercelRequest) {
 			tweet_text = 'twitter';
 		}
 
-		return { content: display_text + '\n' + tweet_text };
+		return new Response(display_text + '\n' + tweet_text);
 	} catch (e: any) {
 		console.log(`${e.message}`);
 		return new Response(`Failed to get tweet contents`, {
