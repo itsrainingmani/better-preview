@@ -128,8 +128,8 @@ export default async function handler(request: VercelRequest) {
 				</div>
 			),
 			{
-				width: 1200,
-				height: 630,
+				width: 800,
+				height: 400,
 				fonts: [
 					{
 						name: 'Berkeley Mono',
