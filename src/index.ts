@@ -27,6 +27,8 @@ app.get('/', async (c) => {
 		<meta property="og:description" content="${twit_contents}" />
     <meta property="og:url" content="${tweet_param}" />
     <meta property="og:image" content="${twit_image}" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
     <script type="text/javascript">
       document.addEventListener("DOMContentLoaded", (event) => {
         window.location.href = "${tweet_param}";
