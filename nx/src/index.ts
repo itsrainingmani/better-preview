@@ -3,11 +3,15 @@ import { html } from "hono/html";
 
 const app = new Hono();
 
-function gen_meta(tweet_param: string, twit_image: string): any {
+function gen_meta(
+	username: string | undefined,
+	tweet_param: string,
+	twit_image: string,
+): any {
 	return html`<!doctype html>
   <head>
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Twit" />
+    <meta property="og:title" content="${username ? "by @" + username : "Twit"}" />
     <meta property="og:url" content="${tweet_param}" />
     <meta property="og:image" content="${twit_image}" />
 		<meta property="og:image:width" content="800" />
@@ -30,7 +34,7 @@ app.get("/", async (c) => {
 	if (tweet_param) {
 		const twit_image = `${image_api_url}${tweet_param}`;
 
-		return c.html(gen_meta(tweet_param, twit_image));
+		return c.html(gen_meta(undefined, tweet_param, twit_image));
 	} else {
 		return c.text("Tweet not supplied", 500);
 	}
@@ -44,7 +48,7 @@ app.get("/:username/status/:tweet_id", async (c) => {
 	const tweet_param = `https://x.com/${username}/status/${tweet_id}`;
 	const twit_image = `${image_api_url}${tweet_param}`;
 
-	return c.html(gen_meta(tweet_param, twit_image));
+	return c.html(gen_meta(username, tweet_param, twit_image));
 });
 
 app.get("/notfound", (c) => {
