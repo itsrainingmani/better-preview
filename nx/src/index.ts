@@ -48,6 +48,8 @@ app.get('/:username/status/:tweet_id', async (c) => {
 	const { username, tweet_id } = c.req.param();
 	const tweet_param = `https://x.com/${username}/status/${tweet_id}`;
 	const twit_image = `${image_api_url}${tweet_param}`;
+
+	return c.html(gen_meta(username, tweet_param, twit_image));
 });
 
 app.get('/notfound', (c) => {
