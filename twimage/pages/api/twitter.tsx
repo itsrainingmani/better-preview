@@ -29,10 +29,9 @@ function decodeHtmlEntities(html: string) {
 				bdquo: '„',
 			};
 			return map[named] || match;
-		} else {
-			// Handle decimal entities
-			return String.fromCharCode(decimal);
 		}
+		// Handle decimal entities
+		return String.fromCharCode(decimal);
 	});
 }
 
@@ -55,23 +54,23 @@ export default async function handler(request: VercelRequest) {
 			const twitter_oembed = `https://publish.twitter.com/oembed?url=${title}&omit_script=1&lang=en`;
 
 			const resp = await fetch(twitter_oembed);
-			let data = await resp.json();
+			const data = await resp.json();
 
-			const domstring = parse(data['html']);
+			const domstring = parse(data.html);
 			image_text = decodeHtmlEntities(
 				domstring.getElementsByTagName('blockquote')[0].innerText
 			);
 			console.log(image_text);
 
-			let last_emdash = image_text.lastIndexOf('— ');
+			const last_emdash = image_text.lastIndexOf('— ');
 
-			let split_name_and_date = image_text
+			const split_name_and_date = image_text
 				.slice(last_emdash + 2, image_text.length)
 				.split(')');
-			let display_name = split_name_and_date[0].trim() + ')';
-			let tweet_date = split_name_and_date[1].trim();
+			const display_name = `${split_name_and_date[0].trim()})`;
+			const tweet_date = split_name_and_date[1].trim();
 
-			display_text = `${display_name} | ${tweet_date}`;
+			display_text = tweet_date;
 			image_text = image_text.slice(0, last_emdash);
 
 			if (image_text.length >= MAX_TWEET_LENGTH) {
@@ -141,7 +140,7 @@ export default async function handler(request: VercelRequest) {
 		);
 	} catch (e: any) {
 		console.log(`${e.message}`);
-		return new Response(`Failed to generate the image`, {
+		return new Response('Failed to generate the image', {
 			status: 500,
 		});
 	}
