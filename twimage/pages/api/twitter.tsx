@@ -70,7 +70,7 @@ export default async function handler(request: VercelRequest) {
 			const display_name = `${split_name_and_date[0].trim()})`;
 			const tweet_date = split_name_and_date[1].trim();
 
-			display_text = tweet_date;
+			display_text = `${display_name} | ${tweet_date}`;
 			image_text = image_text.slice(0, last_emdash);
 
 			if (image_text.length >= MAX_TWEET_LENGTH) {
@@ -95,31 +95,40 @@ export default async function handler(request: VercelRequest) {
 						justifyContent: 'center',
 						flexDirection: 'column',
 						backgroundImage: 'linear-gradient(to bottom, #dbf4ff, #fff1f1)',
-						fontSize: 60,
 						letterSpacing: -2,
 						fontWeight: 700,
 						textAlign: 'center',
+						boxSizing: 'border-box',
 					}}
 				>
 					<div
 						style={{
-							fontSize: 30,
+							fontSize: 'clamp(14px, 4vw, 20px)',
 							marginBottom: '10px',
 							fontFamily: 'Berkeley Mono',
+							overflow: 'hidden',
+							textOverflow: 'ellipsis',
+							whiteSpace: 'nowrap',
 						}}
 					>
 						{display_text}
 					</div>
 					<div
 						style={{
-							fontSize: 40,
+							fontSize: 'clamp(20px, 5vw, 40px)',
 							fontStyle: 'normal',
 							letterSpacing: '-0.025em',
-							padding: '0 60px',
+							padding: '0 20px',
 							lineHeight: 1.2,
 							wordWrap: 'break-word',
 							whiteSpace: 'pre-line',
 							fontFamily: 'Berkeley Mono',
+							maxHeight: '80%',
+							overflow: 'hidden',
+							display: '-webkit-box',
+							WebkitLineClamp: '4',
+							WebkitBoxOrient: 'vertical',
+							textOverflow: 'ellipsis',
 						}}
 					>
 						{image_text}
