@@ -7,7 +7,7 @@ function gen_meta(
 	username: string | undefined,
 	tweet_param: string,
 	twit_image: string
-): any {
+) {
 	return html`<!doctype html>
   <head>
     <meta property="og:type" content="website" />
@@ -30,7 +30,7 @@ function gen_meta(
 }
 
 app.get('/', async (c) => {
-	let image_api_url = c.env.TWIT_IMAGE_URL;
+	const image_api_url = c.env?.TWIT_IMAGE_URL;
 
 	const tweet_param = c.req.query('tweet');
 	if (tweet_param) {
@@ -43,7 +43,7 @@ app.get('/', async (c) => {
 
 // tweets are in the format - https://x.com/:username/status/:tweet_id
 app.get('/:username/status/:tweet_id', async (c) => {
-	const image_api_url = c.env.TWIT_IMAGE_URL;
+	const image_api_url = c.env?.TWIT_IMAGE_URL;
 
 	const { username, tweet_id } = c.req.param();
 	const tweet_param = `https://x.com/${username}/status/${tweet_id}`;

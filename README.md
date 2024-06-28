@@ -6,6 +6,6 @@ Use this service to create links that will show previews.
 
 ## Usage
 
-`https://nx.itsmani.workers.dev/?tweet=TWEET_URL`
+`https://nx.itsmani.workers.dev/:username/status/:tweet_id`
 
-eg. -> <https://nx.itsmani.workers.dev/?tweet=https://x.com/leostera/status/1753619722132750413>
+eg. -> <https://nx.itsmani.workers.dev/leostera/status/1753619722132750413>
