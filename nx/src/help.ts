@@ -32,19 +32,27 @@ export function help_msg() {
 						}
 					}
 
+					html,
+					body {
+						height: 100%;
+						margin: 0;
+						padding: 0;
+					}
+
 					body {
 						font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
 							Helvetica, Arial, sans-serif;
 						background-color: var(--bg-color);
 						color: var(--text-color);
 						line-height: 1.6;
-						margin: 0;
-						padding: 0;
 					}
 					.container {
 						max-width: 600px;
 						margin: 0 auto;
 						padding: 20px;
+						padding-bottom: 60px; /* Add space for the footer */
+						position: relative;
+						min-height: 100vh;
 					}
 					h2 {
 						color: #1da1f2;
@@ -113,6 +121,28 @@ export function help_msg() {
 						stroke-dashoffset: 100;
 						animation: draw 2s linear forwards infinite;
 					}
+					footer {
+						width: 100%;
+						padding: 10px 0;
+						font-size: 14px;
+						color: #777;
+						text-align: center;
+						border-top: 1px solid var(--card-bg-color);
+						position: absolute;
+						bottom: 0;
+						left: 0;
+					}
+
+					footer a {
+						color: #0084ff;
+						text-decoration: none;
+					}
+
+					footer a:hover {
+						color: #333;
+						text-decoration: underline;
+					}
+
 					@keyframes draw {
 						to {
 							stroke-dashoffset: 0;
@@ -207,6 +237,22 @@ export function help_msg() {
 						</svg>
 					</div>
 				</div>
+				<footer>
+					made by
+					<a
+						href="https://twitter.com/itsrainingmani"
+						target="_blank"
+						rel="noopener noreferrer"
+						>@itsrainingmani</a
+					>
+					<span style="color: #ccc;">|</span>
+					<a
+						href="https://github.com/itsrainingmani"
+						target="_blank"
+						rel="noopener noreferrer"
+						>github</a
+					>
+				</footer>
 			</body>
 		</html> `;
 }
