@@ -37,9 +37,13 @@ function decodeHtmlEntities(html: string) {
 
 export default async function handler(request: VercelRequest) {
 	try {
-		const fontData = await fetch(
-			new URL("../../assets/berkeley-mono.ttf", import.meta.url),
+		const regFontData = await fetch(
+			new URL("../../assets/berkeley-mono-regular.ttf", import.meta.url),
 		).then((res) => res.arrayBuffer());
+		const boldFontData = await fetch(
+			new URL("../../assets/berkeley-mono-bold.ttf", import.meta.url),
+		).then((res) => res.arrayBuffer());
+
 		const { searchParams } = new URL(request.url ?? "");
 
 		// ?title=<title>
@@ -73,13 +77,13 @@ export default async function handler(request: VercelRequest) {
 			display_text = `${display_name} | ${tweet_date}`;
 			image_text = image_text.slice(0, last_emdash);
 
-			if (image_text.length >= MAX_TWEET_LENGTH) {
-				image_text = image_text.slice(0, MAX_TWEET_LENGTH - 3);
-			}
+			// if (image_text.length >= MAX_TWEET_LENGTH) {
+			// 	image_text = image_text.slice(0, MAX_TWEET_LENGTH - 3);
+			// }
 
-			if (image_text.substring(image_text.length - 3, image_text.length)) {
-				image_text += "...";
-			}
+			// if (image_text.substring(image_text.length - 3, image_text.length)) {
+			// 	image_text += "...";
+			// }
 		} else {
 			image_text = "twitter";
 		}
@@ -96,24 +100,25 @@ export default async function handler(request: VercelRequest) {
 					backgroundImage: "linear-gradient(to bottom, #dbf4ff, #fff1f1)",
 					letterSpacing: "normal",
 					textAlign: "justify",
+					fontSize: 40,
 				}}
 			>
 				<div
 					style={{
-						fontSize: "clamp(1rem, -2rem + 7vw, 3rem)",
+						fontSize: 30,
 						marginBottom: "10px",
 						fontFamily: "Berkeley Mono",
 						overflow: "hidden",
 						textOverflow: "ellipsis",
 						whiteSpace: "nowrap",
-						fontWeight: 500,
+						fontWeight: 400,
 					}}
 				>
 					{display_text}
 				</div>
 				<div
 					style={{
-						fontSize: "clamp(2rem, -3rem + 8vw, 4rem)",
+						fontSize: 40,
 						lineHeight: 1.4,
 						wordWrap: "break-word",
 						whiteSpace: "pre-line",
@@ -133,8 +138,13 @@ export default async function handler(request: VercelRequest) {
 				fonts: [
 					{
 						name: "Berkeley Mono",
-						data: fontData,
-						style: "normal",
+						data: regFontData,
+						weight: 400,
+					},
+					{
+						name: "Berkeley Mono",
+						data: boldFontData,
+						weight: 700,
 					},
 				],
 			},
