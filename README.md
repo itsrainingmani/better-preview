@@ -1,6 +1,8 @@
 # Better Preview
 
-![Vercel](https://vercelbadge.vercel.app/api/itsrainingmani/better-preview?style=for-the-badge)
+![Vercel](https://vercelbadge.vercel.app/api/itsrainingmani/better-preview)
+
+![twit](https://github.com/itsrainingmani/better-preview/assets/10191300/095f820a-4b77-476c-b8ae-aad68cc9efe2)
 
 FB Messenger previews for any `x.com` / `twitter.com` links are completely borked.
 
