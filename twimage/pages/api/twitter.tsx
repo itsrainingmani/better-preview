@@ -105,7 +105,7 @@ export default async function handler(request: VercelRequest) {
 			>
 				<div
 					style={{
-						fontSize: 30,
+						fontSize: 20,
 						marginBottom: "10px",
 						fontFamily: "Berkeley Mono",
 						overflow: "hidden",
@@ -118,8 +118,9 @@ export default async function handler(request: VercelRequest) {
 				</div>
 				<div
 					style={{
-						fontSize: 40,
+						fontSize: 30,
 						lineHeight: 1.4,
+						padding: "0 10px",
 						wordWrap: "break-word",
 						whiteSpace: "pre-line",
 						fontFamily: "Berkeley Mono",
