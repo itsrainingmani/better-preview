@@ -77,13 +77,13 @@ export default async function handler(request: VercelRequest) {
 			display_text = `${display_name} | ${tweet_date}`;
 			image_text = image_text.slice(0, last_emdash);
 
-			// if (image_text.length >= MAX_TWEET_LENGTH) {
-			// 	image_text = image_text.slice(0, MAX_TWEET_LENGTH - 3);
-			// }
+			if (image_text.length >= MAX_TWEET_LENGTH) {
+				image_text = image_text.slice(0, MAX_TWEET_LENGTH - 3);
+			}
 
-			// if (image_text.substring(image_text.length - 3, image_text.length)) {
-			// 	image_text += "...";
-			// }
+			if (image_text.substring(image_text.length - 3, image_text.length)) {
+				image_text += "...";
+			}
 		} else {
 			image_text = "twitter";
 		}
@@ -120,7 +120,7 @@ export default async function handler(request: VercelRequest) {
 					style={{
 						fontSize: 30,
 						lineHeight: 1.4,
-						padding: "0 10px",
+						padding: "0 20px",
 						wordWrap: "break-word",
 						whiteSpace: "pre-line",
 						fontFamily: "Berkeley Mono",
