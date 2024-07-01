@@ -8,6 +8,11 @@ Use this service to create links that will show previews on Facebook
 
 ## Usage
 
+- Fastest Method
+1. Download the `Twit` iOS/MacOS shortcut [here](https://www.icloud.com/shortcuts/d366252a721e4c1a8336503021de1a9b)
+2. In the Twitter iOS App, use `Share via...` and then click on the `Twit` shortcut. This will automatically replace the link and open up the Messenger Share View
+
+- Manual Method
 Replace `x.com` with `twit.rip` in any tweet link -> `https://twit.rip/:username/status/:tweet_id`
 
 eg. -> <https://twit.rip/leostera/status/1753619722132750413>
