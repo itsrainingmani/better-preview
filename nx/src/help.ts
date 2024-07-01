@@ -6,7 +6,10 @@ export function help_msg() {
 			<head>
 				<meta charset="UTF-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-				<meta property="og:image" content="" />
+				<meta
+					property="og:image"
+					content="https://raw.githubusercontent.com/itsrainingmani/better-preview/main/twit.png"
+				/>
 				<title>Better Tweet Previews</title>
 				<link
 					rel="icon"
