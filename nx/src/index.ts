@@ -1,18 +1,19 @@
-import { Hono } from 'hono';
-import { html } from 'hono/html';
+import { Hono } from "hono";
+import { html } from "hono/html";
+import { help_msg } from "./help";
 
 const app = new Hono();
 
 function gen_meta(
 	username: string | undefined,
 	tweet_param: string,
-	twit_image: string
+	twit_image: string,
 ) {
 	return html`<!doctype html>
   <head>
     <meta property="og:type" content="website" />
     <meta property="og:title" content="${
-			username ? `by @${username}` : 'Twit'
+			username ? `by @${username}` : "Twit"
 		}" />
     <meta property="og:url" content="${tweet_param}" />
     <meta property="og:image" content="${twit_image}" />
@@ -29,20 +30,20 @@ function gen_meta(
 </html>`;
 }
 
-app.get('/', async (c) => {
+app.get("/", async (c) => {
 	const image_api_url = c.env?.TWIT_IMAGE_URL;
 
-	const tweet_param = c.req.query('tweet');
+	const tweet_param = c.req.query("tweet");
 	if (tweet_param) {
 		const twit_image = `${image_api_url}${tweet_param}`;
 
 		return c.html(gen_meta(undefined, tweet_param, twit_image));
 	}
-	return c.text('Tweet not supplied', 500);
+	return c.html(help_msg());
 });
 
 // tweets are in the format - https://x.com/:username/status/:tweet_id
-app.get('/:username/status/:tweet_id', async (c) => {
+app.get("/:username/status/:tweet_id", async (c) => {
 	const image_api_url = c.env?.TWIT_IMAGE_URL;
 
 	const { username, tweet_id } = c.req.param();
@@ -52,7 +53,7 @@ app.get('/:username/status/:tweet_id', async (c) => {
 	return c.html(gen_meta(username, tweet_param, twit_image));
 });
 
-app.get('/notfound', (c) => {
+app.get("/notfound", (c) => {
 	return c.notFound();
 });
 
