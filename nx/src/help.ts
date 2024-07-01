@@ -6,7 +6,12 @@ export function help_msg() {
 			<head>
 				<meta charset="UTF-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-				<title>Twit Shortcut Help</title>
+				<meta property="og:image" content="" />
+				<title>Better Tweet Previews</title>
+				<link
+					rel="icon"
+					href="https://github.com/itsrainingmani/better-preview/assets/10191300/095f820a-4b77-476c-b8ae-aad68cc9efe2"
+				/>
 				<style>
 					:root {
 						--bg-color: #f0f2f5;
