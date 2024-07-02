@@ -38,15 +38,14 @@ function decodeHtmlEntities(html: string) {
 export default async function handler(request: VercelRequest) {
 	try {
 		const regFontData = await fetch(
-			new URL("../../assets/berkeley-mono-regular.ttf", import.meta.url),
+			new URL("../../assets/Lato-Regular.ttf", import.meta.url),
 		).then((res) => res.arrayBuffer());
 		const boldFontData = await fetch(
-			new URL("../../assets/berkeley-mono-bold.ttf", import.meta.url),
+			new URL("../../assets/Lato-Bold.ttf", import.meta.url),
 		).then((res) => res.arrayBuffer());
 
 		const { searchParams } = new URL(request.url ?? "");
 
-		// ?title=<title>
 		const hasTitle = searchParams.has("url");
 		let image_text = "";
 		let display_text = "";
@@ -76,14 +75,6 @@ export default async function handler(request: VercelRequest) {
 
 			display_text = `${display_name} | ${tweet_date}`;
 			image_text = image_text.slice(0, last_emdash);
-
-			if (image_text.length >= MAX_TWEET_LENGTH) {
-				image_text = image_text.slice(0, MAX_TWEET_LENGTH - 3);
-			}
-
-			if (image_text.substring(image_text.length - 3, image_text.length)) {
-				image_text += "...";
-			}
 		} else {
 			image_text = "twitter";
 		}
@@ -100,18 +91,20 @@ export default async function handler(request: VercelRequest) {
 					backgroundImage: "linear-gradient(to bottom, #dbf4ff, #fff1f1)",
 					letterSpacing: "normal",
 					textAlign: "justify",
+					fontFamily: "Lato",
 					fontSize: 40,
+					boxSizing: "border-box",
 				}}
 			>
 				<div
 					style={{
 						fontSize: 20,
 						marginBottom: "10px",
-						fontFamily: "Berkeley Mono",
 						overflow: "hidden",
 						textOverflow: "ellipsis",
 						whiteSpace: "nowrap",
 						fontWeight: 400,
+						WebkitFontSmoothing: "always",
 					}}
 				>
 					{display_text}
@@ -123,29 +116,32 @@ export default async function handler(request: VercelRequest) {
 						padding: "0 20px",
 						wordWrap: "break-word",
 						whiteSpace: "pre-line",
-						fontFamily: "Berkeley Mono",
 						maxHeight: "80%",
 						overflow: "hidden",
 						textOverflow: "ellipsis",
-						fontWeight: 700,
+						fontWeight: 600,
+						display: "-webkit-box",
+						WebkitLineClamp: "7",
+						WebkitBoxOrient: "vertical",
+						WebkitFontSmoothing: "always",
 					}}
 				>
 					{image_text}
 				</div>
 			</div>,
 			{
-				width: 800,
-				height: 400,
+				width: 1200,
+				height: 630,
 				fonts: [
 					{
-						name: "Berkeley Mono",
+						name: "Lato",
 						data: regFontData,
 						weight: 400,
 					},
 					{
-						name: "Berkeley Mono",
+						name: "Lato",
 						data: boldFontData,
-						weight: 700,
+						weight: 600,
 					},
 				],
 			},
