@@ -12,9 +12,7 @@ function gen_meta(
 	return html`<!doctype html>
   <head>
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="${
-			username ? `by @${username}` : "Twit"
-		}" />
+    <meta property="og:title" content="${username ? `by @${username}` : "Twit"}" />
     <meta property="og:url" content="${tweet_param}" />
     <meta property="og:image" content="${twit_image}" />
 		<meta property="og:image:width" content="800" />
@@ -25,7 +23,7 @@ function gen_meta(
       });
     </script>
   </head>
-  <body>
+  <body style="background-color:black;">
   </body>
 </html>`;
 }
