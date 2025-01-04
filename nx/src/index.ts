@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { cache } from "hono/cache";
 import { html, raw } from "hono/html";
 import helpContent from "./help.html";
 
@@ -43,15 +44,19 @@ app.get("/", async (c) => {
 });
 
 // tweets are in the format - https://x.com/:username/status/:tweet_id
-app.get("/:username/status/:tweet_id", async (c) => {
-  const image_api_url = c.env?.TWIT_IMAGE_URL;
+app.get(
+  "/:username/status/:tweet_id",
+  async (c) => {
+    const image_api_url = c.env?.TWIT_IMAGE_URL;
 
-  const { username, tweet_id } = c.req.param();
-  const tweet_param = `https://x.com/${username}/status/${tweet_id}`;
-  const twit_image = `${image_api_url}${tweet_param}`;
+    const { username, tweet_id } = c.req.param();
+    const tweet_param = `https://x.com/${username}/status/${tweet_id}`;
+    const twit_image = `${image_api_url}${tweet_param}`;
 
-  return c.html(gen_meta(username, tweet_param, twit_image));
-});
+    return c.html(gen_meta(username, tweet_param, twit_image));
+  },
+  cache({ cacheName: "better-preview", cacheControl: "max-age=86400" })
+);
 
 app.get("/notfound", (c) => {
   return c.notFound();
