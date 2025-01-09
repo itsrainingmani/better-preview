@@ -48,7 +48,7 @@ export default async function handler(request: VercelRequest) {
 
 		const hasTitle = searchParams.has("url");
 		let image_text = "";
-		let display_text = "";
+		let user_info = "";
 		if (hasTitle) {
 			const title = hasTitle
 				? searchParams.get("url")?.slice(0, 100)
@@ -63,7 +63,6 @@ export default async function handler(request: VercelRequest) {
 			image_text = decodeHtmlEntities(
 				domstring.getElementsByTagName("blockquote")[0].innerText,
 			);
-			console.log(image_text);
 
 			const last_emdash = image_text.lastIndexOf("— ");
 
@@ -73,7 +72,7 @@ export default async function handler(request: VercelRequest) {
 			const display_name = `${split_name_and_date[0].trim()})`;
 			const tweet_date = split_name_and_date[1].trim();
 
-			display_text = `${display_name} | ${tweet_date}`;
+			user_info = `${display_name} | ${tweet_date}`;
 			image_text = image_text.slice(0, last_emdash);
 		} else {
 			image_text = "twitter";
@@ -89,7 +88,8 @@ export default async function handler(request: VercelRequest) {
 					justifyContent: "center",
 					flexDirection: "column",
 					// backgroundImage: "linear-gradient(to bottom, #dbf4ff, #fff1f1)",
-					backgroundColor: "##1C1B1B",
+					// backgroundColor: "#1C1B1B",
+					backgroundImage: "linear-gradient(135deg, #0A0A0A, #1A1A2E, #2A0A3D)",
 					color: "#E7E9EA",
 					letterSpacing: "normal",
 					textAlign: "justify",
@@ -109,7 +109,7 @@ export default async function handler(request: VercelRequest) {
 						WebkitFontSmoothing: "always",
 					}}
 				>
-					{display_text}
+					{user_info}
 				</div>
 				<div
 					style={{
@@ -132,8 +132,8 @@ export default async function handler(request: VercelRequest) {
 				</div>
 			</div>,
 			{
-				width: 800,
-				height: 400,
+				width: 1200,
+				height: 630,
 				fonts: [
 					{
 						name: "Lato",
