@@ -100,7 +100,7 @@ export default async function handler(request: VercelRequest) {
 			>
 				<div
 					style={{
-						fontSize: 20,
+						fontSize: 30,
 						marginBottom: "10px",
 						overflow: "hidden",
 						textOverflow: "ellipsis",
@@ -113,15 +113,15 @@ export default async function handler(request: VercelRequest) {
 				</div>
 				<div
 					style={{
-						fontSize: 30,
+						fontSize: 42,
 						lineHeight: 1.4,
 						padding: "0 20px",
 						wordWrap: "break-word",
 						whiteSpace: "pre-line",
-						maxHeight: "80%",
+						maxHeight: "85%",
 						overflow: "hidden",
 						textOverflow: "ellipsis",
-						fontWeight: 600,
+						fontWeight: 500,
 						display: "-webkit-box",
 						WebkitLineClamp: "7",
 						WebkitBoxOrient: "vertical",
@@ -143,7 +143,7 @@ export default async function handler(request: VercelRequest) {
 					{
 						name: "Lato",
 						data: boldFontData,
-						weight: 600,
+						weight: 500,
 					},
 				],
 			},
